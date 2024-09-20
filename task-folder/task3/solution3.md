@@ -6,7 +6,7 @@
 
 3. Create a busybox pod that runs the command ”ls”, check the output.
 
-
+# Solution
 
 k run nginx1 --image=ngnix -n myspace
 
@@ -18,5 +18,7 @@ vi pod.yaml
 # Apply
 
 k apply -f pod.yaml
+
+# Run Completed pod
 
 k run busybox --image=busybox --command --restart=Never -it -- ls

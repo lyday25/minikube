@@ -7,6 +7,9 @@
 3. Write  a shell script to output the status of the pod
 
 # Solution
+
+# CREATE NAMESPACE
+
 k create ns application
 
 k run web1 --image httpd:alpine3.20 --namespace application --dry-run=client -o yaml > pod.yaml
