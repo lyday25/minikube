@@ -1,28 +1,29 @@
 # Task 7 - Persistent volume
 
-apiVersion: v1
+In namespace mct create a persistence volume  mct-pv. It should have capacity 100Mi with access mode ReadWriteOnce and hostpath /tmp/data, no storage class named defined.
 
-kind: PersistentVolume
+In the same namespace create  a PersistentVolumeClaim  called mct-pvc, it should request 100MI and access mode ReadWriteOnce.
 
-metadata:
 
-  Namespace: default
+N/B the PVC should be bound to the PV correctly.
 
-  name: persist-pv
 
-  
+In the same namespace create a pod called nginx-mct using the image nginx while the container name is mct-container, which mounts the volume at /tmp/projectdata
 
-spec:
+# Solution
 
-  capacity:
+minikube start
+alias k=kubectl
+k create ns mct
+k apply -f mct
 
-    storage: 100Mi
+k apply -f mct-pvc.yaml
 
-  accessModes:
+k get pvc -n mct
+k apply -f nginx-pod.yaml
 
-    - ReadWriteOnce
+# To get more information
+k get pod -n mct -o wide
 
-  hostPath:
-
-    path: "/home/ubuntu/storage/data"
-
+k describe pod nginx-mct -n mct
+k delete ns mct
